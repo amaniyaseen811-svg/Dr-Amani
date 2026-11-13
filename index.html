@@ -96,7 +96,14 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--olive);border-co
 .msg{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:12px 16px;margin-top:10px}
 .msg small{color:var(--muted)}
 
-.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
+.yt-play{position:relative;display:block;width:100%;aspect-ratio:16/9;padding:0;border:0;border-radius:4px;overflow:hidden;background:#000;cursor:pointer}
+.yt-play img{width:100%;height:100%;object-fit:cover;display:block}
+.yt-btn{position:absolute;inset:0;margin:auto;width:58px;height:40px;border-radius:10px;background:rgba(200,0,0,.88);color:#fff;font-size:20px;display:grid;place-items:center}
+.yt-play:hover .yt-btn{background:#e00}
+.yt-play:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.vid.yt iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:4px;display:block}
+.vid.yt figcaption{font-size:14px;line-height:1.6}
 .vid{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px}
 .vid video{width:100%;max-width:100%;aspect-ratio:9/16;background:#000;border-radius:4px;display:block}
 .vid figcaption{font-size:14.5px;margin-top:8px;font-weight:600}
@@ -270,14 +277,14 @@ html{scroll-behavior:smooth}
   <div class="media">
     <div class="outlet"><h3>راديو شباب FM</h3><ul>
       <li><a href="https://youtu.be/aDPg7QJATM4" target="_blank" rel="noopener">هل تغيّرت نظرة الشباب للوظيفة والاستقرار المهني؟</a></li>
-      <li>تكوين الذات في سنوات الجامعة الأولى</li>
-      <li>متطلبات سوق العمل الحديث في ظل الذكاء الاصطناعي</li>
-      <li>كيف نتجنّب الجريمة الإلكترونية</li>
-      <li>أهمية حماية الملكية الفكرية للأفكار</li>
-      <li>كيف يكون الفشل درسًا يرشدنا إلى الطريق الصحيح</li>
+      <li><a href="https://youtu.be/BHeYL5n_61A" target="_blank" rel="noopener">تكوين الذات في سنوات الجامعة الأولى</a></li>
+      <li><a href="https://youtu.be/zpOp9OuB5MQ" target="_blank" rel="noopener">متطلبات سوق العمل الحديث في ظل الذكاء الاصطناعي</a></li>
+      <li><a href="https://youtu.be/rayjTDqLV58" target="_blank" rel="noopener">كيف نتجنّب الجريمة الإلكترونية</a></li>
+      <li><a href="https://youtu.be/u-cc3UQRrCQ" target="_blank" rel="noopener">أهمية حماية الملكية الفكرية للأفكار</a></li>
+      <li><a href="https://youtu.be/zITEuTWf0Kk" target="_blank" rel="noopener">كيف يكون الفشل درسًا يرشدنا إلى الطريق الصحيح</a></li>
     </ul></div>
     <div class="outlet"><h3>تلفزيون وإذاعة كل الناس</h3><ul>
-      <li>يوم المعلّم الفلسطيني</li><li>برنامج «أوتار الصباح»</li><li>واقع التعليم في طولكرم في ظل الاجتياح المستمر</li><li>تغطية تخريج نوادي قارب الصيفية</li>
+      <li><a href="https://youtu.be/BVmF1cwk0Ns" target="_blank" rel="noopener">يوم المعلّم الفلسطيني</a></li><li><a href="https://youtu.be/rreWuAFSn_4" target="_blank" rel="noopener">برنامج «أوتار الصباح»</a></li><li>واقع التعليم في طولكرم في ظل الاجتياح المستمر</li><li>تغطية تخريج نوادي قارب الصيفية</li>
     </ul></div>
     <div class="outlet"><h3>منصة My Space</h3><ul>
       <li>التعلّم بالتلعيب باستخدام الألعاب والقصص العالمية</li><li>دور الذكاء الاجتماعي في النجاح الشخصي والمجتمعي</li><li>العنف المدرسي والتنمّر</li><li>تربية الأبناء: إجبار أم حوار؟</li>
@@ -363,10 +370,61 @@ html{scroll-behavior:smooth}
 
 <section id="videos">
   <h2>فيديوهات</h2>
-  <div class="vids">
-    <figure class="vid wide"><video controls playsinline preload="none" poster="video2.jpg" src="video2.mp4"></video><figcaption>السيرة الذاتية للدكتورة أماني ياسين</figcaption></figure>
-    <figure class="vid"><video controls playsinline preload="none" poster="video1.jpg" src="video1.mp4"></video><figcaption>«ليس كلُّ طالبٍ متعثّرٍ كسولًا»</figcaption></figure>
+  <div class="g-tabs v-tabs" role="tablist">
+    <button type="button" class="v-tab g-tab on" data-f="all">الكل</button>
+    <button type="button" class="v-tab g-tab" data-f="media">لقاءات إعلامية</button>
+    <button type="button" class="v-tab g-tab" data-f="eco">إيكو روك وإنجاز</button>
+    <button type="button" class="v-tab g-tab" data-f="qareb">جمعية قارب</button>
+    <button type="button" class="v-tab g-tab" data-f="mine">من قناتي</button>
+    <button type="button" class="v-tab g-tab" data-f="gm">منصة GamnaMarks</button>
   </div>
+  <div class="vids">
+    <figure class="vid wide" data-c="mine"><video controls playsinline preload="none" poster="video2.jpg" src="video2.mp4"></video><figcaption>السيرة الذاتية للدكتورة أماني ياسين</figcaption></figure>
+    <figure class="vid" data-c="mine"><video controls playsinline preload="none" poster="video1.jpg" src="video1.mp4"></video><figcaption>«ليس كلُّ طالبٍ متعثّرٍ كسولًا»</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="BVmF1cwk0Ns" aria-label="تشغيل: يوم المعلّم الفلسطيني — تلفزيون كل الناس"><img loading="lazy" src="https://i.ytimg.com/vi/BVmF1cwk0Ns/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>يوم المعلّم الفلسطيني — تلفزيون كل الناس</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="rreWuAFSn_4" aria-label="تشغيل: برنامج «أوتار الصباح» — راديو وتلفزيون كل الناس"><img loading="lazy" src="https://i.ytimg.com/vi/rreWuAFSn_4/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>برنامج «أوتار الصباح» — راديو وتلفزيون كل الناس</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="aDPg7QJATM4" aria-label="تشغيل: هل تغيّرت نظرة الشباب للوظيفة والاستقرار المهني؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/aDPg7QJATM4/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>هل تغيّرت نظرة الشباب للوظيفة والاستقرار المهني؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="mhiviktAjz8" aria-label="تشغيل: الجامعة ليست شهادة فقط: كيف تبني نفسك خلال سنوات الدراسة؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/mhiviktAjz8/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>الجامعة ليست شهادة فقط: كيف تبني نفسك خلال سنوات الدراسة؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="zpOp9OuB5MQ" aria-label="تشغيل: متطلبات سوق العمل الحديث في ظل الذكاء الاصطناعي — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/zpOp9OuB5MQ/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>متطلبات سوق العمل الحديث في ظل الذكاء الاصطناعي — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="VmogExAKINc" aria-label="تشغيل: كيف نبني المسارات المهنية للشباب — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/VmogExAKINc/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>كيف نبني المسارات المهنية للشباب — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="BHeYL5n_61A" aria-label="تشغيل: تكوين الذات في سنوات الجامعة الأولى — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/BHeYL5n_61A/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>تكوين الذات في سنوات الجامعة الأولى — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="Hm1whHihZBQ" aria-label="تشغيل: ما المقصود بالذكاء الاجتماعي؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/Hm1whHihZBQ/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>ما المقصود بالذكاء الاجتماعي؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="rayjTDqLV58" aria-label="تشغيل: كيف نتجنّب الجريمة الإلكترونية؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/rayjTDqLV58/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>كيف نتجنّب الجريمة الإلكترونية؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="u-cc3UQRrCQ" aria-label="تشغيل: أهمية حماية الملكية الفكرية للأفكار — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/u-cc3UQRrCQ/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>أهمية حماية الملكية الفكرية للأفكار — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="zITEuTWf0Kk" aria-label="تشغيل: كيف يكون الفشل درسًا يرشدنا إلى الطريق الصحيح؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/zITEuTWf0Kk/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>كيف يكون الفشل درسًا يرشدنا إلى الطريق الصحيح؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="q4vR3OfdGGU" aria-label="تشغيل: فن اللامبالاة: طريقك إلى السلام النفسي — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/q4vR3OfdGGU/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>فن اللامبالاة: طريقك إلى السلام النفسي — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="Dn9gdbnz-TU" aria-label="تشغيل: هل يصلح أن يكون الجميع مستقلّين (فريلانسر)؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/Dn9gdbnz-TU/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>هل يصلح أن يكون الجميع مستقلّين (فريلانسر)؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="dJpiwU_OY1M" aria-label="تشغيل: كيف يؤثر الأصدقاء في قرارات بعضهم؟ — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/dJpiwU_OY1M/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>كيف يؤثر الأصدقاء في قرارات بعضهم؟ — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="media"><button type="button" class="yt-play" data-id="DWREc1TTELg" aria-label="تشغيل: هوس العضلات والمكمّلات الغذائية: المخاطر الخفية — شباب FM"><img loading="lazy" src="https://i.ytimg.com/vi/DWREc1TTELg/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>هوس العضلات والمكمّلات الغذائية: المخاطر الخفية — شباب FM</figcaption></figure>
+    <figure class="vid yt" data-c="eco"><button type="button" class="yt-play" data-id="RqOrxSE6fQY" aria-label="تشغيل: «إيكو روك» تحصد جائزة أفضل شركة طلابية عربية 2025 — شبكة راية"><img loading="lazy" src="https://i.ytimg.com/vi/RqOrxSE6fQY/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>«إيكو روك» تحصد جائزة أفضل شركة طلابية عربية 2025 — شبكة راية</figcaption></figure>
+    <figure class="vid yt" data-c="eco"><button type="button" class="yt-play" data-id="Zy78wjAjuKw" aria-label="تشغيل: رغم الحصار والهدم.. طالبات طولكرم يمثّلن فلسطين في «إنجاز العرب»"><img loading="lazy" src="https://i.ytimg.com/vi/Zy78wjAjuKw/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>رغم الحصار والهدم.. طالبات طولكرم يمثّلن فلسطين في «إنجاز العرب»</figcaption></figure>
+    <figure class="vid yt" data-c="eco"><button type="button" class="yt-play" data-id="fxb90Rh3aEw" aria-label="تشغيل: إعلان الشركة الطلابية الفائزة بجائزة إنجاز فلسطين 2025 — وكالة وطن"><img loading="lazy" src="https://i.ytimg.com/vi/fxb90Rh3aEw/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>إعلان الشركة الطلابية الفائزة بجائزة إنجاز فلسطين 2025 — وكالة وطن</figcaption></figure>
+    <figure class="vid yt" data-c="eco"><button type="button" class="yt-play" data-id="k2tzvNX9rTQ" aria-label="تشغيل: تكريم فريق الطالبات الفائزات عن شركة «إيكو روك» — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/k2tzvNX9rTQ/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>تكريم فريق الطالبات الفائزات عن شركة «إيكو روك» — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="eco"><button type="button" class="yt-play" data-id="obH00enzgbg" aria-label="تشغيل: إطلاق فعاليات التعلّم عن طريق اللعب في مدرسة عمر بن عبد العزيز — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/obH00enzgbg/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>إطلاق فعاليات التعلّم عن طريق اللعب في مدرسة عمر بن عبد العزيز — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="HMe3sWGZnqA" aria-label="تشغيل: مقابلة مع رئيسة جمعية تأمّلات شبابية للإبداع د. أماني ياسين"><img loading="lazy" src="https://i.ytimg.com/vi/HMe3sWGZnqA/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>مقابلة مع رئيسة جمعية تأمّلات شبابية للإبداع د. أماني ياسين</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="A6jJ0kHfdL0" aria-label="تشغيل: حفل تتويج «نجمة قارب» — تلفزيون كل الناس"><img loading="lazy" src="https://i.ytimg.com/vi/A6jJ0kHfdL0/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>حفل تتويج «نجمة قارب» — تلفزيون كل الناس</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="fgH5Rq_psn0" aria-label="تشغيل: حفل تتويج «نجمة قارب» — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/fgH5Rq_psn0/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>حفل تتويج «نجمة قارب» — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="vTA0WkAlmuk" aria-label="تشغيل: اختتام فعاليات نادي «نبض الفكر والإبداع» — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/vTA0WkAlmuk/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>اختتام فعاليات نادي «نبض الفكر والإبداع» — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="hsv51JCPjG0" aria-label="تشغيل: اختتام فعاليات نادي قارب الصيفي — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/hsv51JCPjG0/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>اختتام فعاليات نادي قارب الصيفي — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="qareb"><button type="button" class="yt-play" data-id="5Tk_pUPcYZM" aria-label="تشغيل: مؤتمر «أثر المرأة الفلسطينية في المجتمع وسوق العمل» — تلفزيون الفجر"><img loading="lazy" src="https://i.ytimg.com/vi/5Tk_pUPcYZM/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>مؤتمر «أثر المرأة الفلسطينية في المجتمع وسوق العمل» — تلفزيون الفجر</figcaption></figure>
+    <figure class="vid yt" data-c="mine"><button type="button" class="yt-play" data-id="oHBf0n47kVg" aria-label="تشغيل: تعرّفوا على د. أماني ياسين: التعليم والابتكار وتمكين الشباب"><img loading="lazy" src="https://i.ytimg.com/vi/oHBf0n47kVg/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>تعرّفوا على د. أماني ياسين: التعليم والابتكار وتمكين الشباب</figcaption></figure>
+    <figure class="vid yt" data-c="mine"><button type="button" class="yt-play" data-id="1UsP2gnnQMs" aria-label="تشغيل: طفلك مبدع… وقد تكون أنت سبب انطفائه"><img loading="lazy" src="https://i.ytimg.com/vi/1UsP2gnnQMs/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>طفلك مبدع… وقد تكون أنت سبب انطفائه</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="vLyXXBa0L9g" aria-label="تشغيل: GamnaMarks: الفيديو التعريفي للمنصة"><img loading="lazy" src="https://i.ytimg.com/vi/vLyXXBa0L9g/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>GamnaMarks: الفيديو التعريفي للمنصة</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="EMZjgBw-0gE" aria-label="تشغيل: الابتكار في عالم GamnaMarks"><img loading="lazy" src="https://i.ytimg.com/vi/EMZjgBw-0gE/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>الابتكار في عالم GamnaMarks</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="VEHnfX3Pgpk" aria-label="تشغيل: عالم سينمائي مليء بالتحدّي لكل المواد الصعبة"><img loading="lazy" src="https://i.ytimg.com/vi/VEHnfX3Pgpk/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>عالم سينمائي مليء بالتحدّي لكل المواد الصعبة</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="BI5FhlFjjXM" aria-label="تشغيل: لمسة واحدة تجعلك تستمتع بالمنهاج الدراسي كله"><img loading="lazy" src="https://i.ytimg.com/vi/BI5FhlFjjXM/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>لمسة واحدة تجعلك تستمتع بالمنهاج الدراسي كله</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="QPjyg9yfoqk" aria-label="تشغيل: قانون أوم بطريقة لن تنساها"><img loading="lazy" src="https://i.ytimg.com/vi/QPjyg9yfoqk/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>قانون أوم بطريقة لن تنساها</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="2pJiCMTt7C0" aria-label="تشغيل: كيف يفهم الطالب الخلية بكل مكوّناتها؟"><img loading="lazy" src="https://i.ytimg.com/vi/2pJiCMTt7C0/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>كيف يفهم الطالب الخلية بكل مكوّناتها؟</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="hryUolN925Q" aria-label="تشغيل: درس المغذيات بعرض شامل"><img loading="lazy" src="https://i.ytimg.com/vi/hryUolN925Q/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>درس المغذيات بعرض شامل</figcaption></figure>
+    <figure class="vid yt" data-c="gm"><button type="button" class="yt-play" data-id="qqBYmL-wLT4" aria-label="تشغيل: فصل الخلية كاملًا: الأنواع والتركيب والأهمية"><img loading="lazy" src="https://i.ytimg.com/vi/qqBYmL-wLT4/hqdefault.jpg" alt=""><span class="yt-btn" aria-hidden="true">▶</span></button><figcaption>فصل الخلية كاملًا: الأنواع والتركيب والأهمية</figcaption></figure>
+  </div>
+  <script>
+  (function(){
+    const tabs=document.querySelectorAll('.v-tab'),cards=document.querySelectorAll('#videos .vid');
+    tabs.forEach(b=>b.addEventListener('click',()=>{tabs.forEach(x=>x.classList.toggle('on',x===b));const f=b.dataset.f;cards.forEach(c=>{c.hidden=!(f==='all'||c.dataset.c===f)})}));
+    document.querySelectorAll('.yt-play').forEach(b=>b.addEventListener('click',()=>{const f=document.createElement('iframe');f.src='https://www.youtube-nocookie.com/embed/'+b.dataset.id+'?autoplay=1&rel=0';f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.title=b.getAttribute('aria-label');b.replaceWith(f)}));
+  })();
+  </script>
 </section>
 
 <section id="follow">
