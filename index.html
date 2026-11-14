@@ -126,6 +126,22 @@ input:focus,textarea:focus,select:focus{outline:2px solid var(--olive);border-co
 .g-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
 .g-tab{font:inherit;font-size:14px;padding:5px 14px;border-radius:5px;border:1.5px solid var(--olive);background:transparent;color:var(--olive);cursor:pointer}
 .g-tab.on{background:var(--olive);color:var(--bg)}
+/* language switcher */
+.langbar{background:var(--bg);border-bottom:1px solid var(--line)}
+.langbar .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;padding-block:8px}
+.lang-b{font:inherit;font-family:system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif;font-size:13.5px;line-height:1.4;padding:3px 11px;border-radius:5px;border:1.5px solid var(--olive);background:transparent;color:var(--olive);cursor:pointer}
+.lang-b.on{background:var(--olive);color:var(--bg);font-weight:600}
+.lang-b .ls{display:none}
+@media (max-width:560px){.lang-b{padding:3px 9px}.lang-b .ln{display:none}.lang-b .ls{display:inline}}
+/* other languages: left-to-right layout */
+html[dir=ltr]{--display:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif;--body:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans",sans-serif}
+html[dir=ltr] body{direction:ltr;line-height:1.7}
+html[dir=ltr] .timeline{border-right:0;border-left:2px solid var(--line)}
+html[dir=ltr] .timeline li{padding:0 0 18px 22px}
+html[dir=ltr] .timeline li::before{right:auto;left:-7px}
+html[dir=ltr] .outlet ul,html[dir=ltr] ul.plain{padding:0 0 0 20px}
+html[dir=ltr] .mail{justify-content:flex-start}
+html[lang=ko] body{word-break:keep-all}
 .g-tab:focus-visible,.g-open:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .g-grid{columns:3 220px;column-gap:12px}
 .g-item{break-inside:avoid;margin:0 0 12px;background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden}
@@ -469,8 +485,8 @@ html{scroll-behavior:smooth}
   </div>
   <script>
   document.getElementById('copy-mail').addEventListener('click',function(){const b=this,t=document.getElementById('gm-mail').textContent;
-    const ok=()=>{b.textContent='تم النسخ';setTimeout(()=>b.textContent='نسخ البريد',1800)};
-    const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('gm-mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='انسخوا البريد المحدَّد'};
+    const t_=x=>(window.__t?window.__t(x):x);const ok=()=>{b.textContent=t_('تم النسخ');setTimeout(()=>b.textContent=t_('نسخ البريد'),1800)};
+    const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('gm-mail'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent=t_('انسخوا البريد المحدَّد')};
     try{navigator.clipboard.writeText(t).then(ok,sel)}catch(e){sel()}});
   </script>
 </section>
@@ -482,5 +498,6 @@ html{scroll-behavior:smooth}
 
 
 
+<script src="i18n.js?v=1"></script>
 </body>
 </html>
