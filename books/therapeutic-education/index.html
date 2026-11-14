@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, noarchive">
 <link rel="icon" href="data:,">
-<title>حين يصبح التعليم علاجًا | When Education Becomes a Cure | Quand l’éducation devient un remède</title>
+<title>حين يصبح التعليم علاجًا | When Education Becomes a Cure | Quand l’éducation devient un remède | Когда образование становится лечением</title>
 <style>
 @font-face{font-family:'Amiri';src:url(fonts/amiri-400.woff2) format('woff2');font-weight:400;font-display:block}
 @font-face{font-family:'Amiri';src:url(fonts/amiri-700.woff2) format('woff2');font-weight:700;font-display:block}
@@ -88,7 +88,8 @@ img{-webkit-user-drag:none;user-select:none;pointer-events:none}
 .toc .row b{color:var(--red);direction:ltr;min-width:3cqw;text-align:end}
 .toc .row span:first-child{flex:0 1 auto;min-width:0}.toc .row b{flex:none}
 .in h1,.in h2,.in h3{hyphens:manual}
-@media (max-width:480px){.bar{gap:5px;padding:8px 8px}.bar button,.bar a{font-size:12px;padding:5px 7px}.bar .pg{font-size:11px}}
+/* lang labels */.bar .ls{display:none}
+@media (max-width:480px){.bar{gap:5px;padding:8px 8px}.bar button,.bar a{font-size:12px;padding:5px 7px}.bar .pg{font-size:11px}.bar .ln{display:none}.bar .ls{display:inline}}
 #measure{position:absolute;left:-99999px;top:0;width:820px;visibility:hidden}
 #measure .page{width:100%}
 .loading{padding:40px;text-align:center;color:#555}
@@ -110,7 +111,7 @@ img{-webkit-user-drag:none;user-select:none;pointer-events:none}
 <script>
 (function(){
 // ---- languages available now; add more codes here as translations are finished ----
-var LANGS=[{c:'ar',n:'العربية'},{c:'en',n:'English'},{c:'fr',n:'Français'}];
+var LANGS=[{c:'ar',n:'العربية'},{c:'en',n:'English'},{c:'fr',n:'Français'},{c:'ru',n:'Русский'}];
 var avail=LANGS.map(function(l){return l.c});
 function pick(){
   var q=new URLSearchParams(location.search).get('lang');
@@ -141,9 +142,9 @@ function start(){
   document.title=B.short+' — '+B.author;
   document.getElementById('ttl').textContent=B.short;
   document.getElementById('tocTtl').textContent=B.toc;
-  document.getElementById('home').title={ar:'العودة إلى الموقع',fr:'Retour au site'}[B.lang]||'Back to site';
+  document.getElementById('home').title={ar:'العودة إلى الموقع',fr:'Retour au site',ru:'Вернуться на сайт'}[B.lang]||'Back to site';
   var lw=document.getElementById('langs');
-  LANGS.forEach(function(l){var b=el('button',l.c===lang?'on':'',l.n);b.type='button';b.onclick=function(){if(l.c===lang)return;try{localStorage.setItem('tb_lang',l.c)}catch(e){}location.search='?lang='+l.c};lw.appendChild(b)});
+  var SH={ar:'ع',en:'EN',fr:'FR',ru:'RU'};LANGS.forEach(function(l){var b=el('button',l.c===lang?'on':'','<span class="ln">'+l.n+'</span><span class="ls">'+(SH[l.c]||l.c.toUpperCase())+'</span>');b.title=l.n;b.type='button';b.onclick=function(){if(l.c===lang)return;try{localStorage.setItem('tb_lang',l.c)}catch(e){}location.search='?lang='+l.c};lw.appendChild(b)});
   var fonts=['16px Amiri','bold 16px Amiri','16px Lora','bold 16px Lora'];
   Promise.all(fonts.map(function(f){return document.fonts.load(f)})).catch(function(){}).then(function(){return document.fonts.ready}).then(function(){
     var srcs=(decode(B.html).match(/img\/[\w-]+\.jpg/g)||[]);
@@ -171,7 +172,7 @@ function build(B){
   var keepRatio=window.scrollY/Math.max(1,document.documentElement.scrollHeight);
   var src=el('div');src.innerHTML=html;
   // chapter h1: split "Chapter One<br>Title" into number + title
-  Array.prototype.forEach.call(src.querySelectorAll('h1'),function(h){var parts=h.innerHTML.split(/<br\s*\/?>/i);h.dataset.t=parts[0].trim();if(parts.length>1&&(h.dataset.sub||/^(References|Références|المراجع)/.test(parts[0].trim()))){h.innerHTML=parts[0].trim()+'<span class="h1sub">'+parts.slice(1).join(' ')+'</span>'}if(parts.length>1&&!h.dataset.sub&&!/^(References|Références|المراجع)/.test(parts[0].trim())){h.dataset.t=parts[0].trim()+(B.lang==='fr'?'\u00a0: ':': ')+parts.slice(1).join(' ').trim();h.innerHTML='<span class="num">'+parts[0].trim()+'</span>'+parts.slice(1).join(' ')}});
+  Array.prototype.forEach.call(src.querySelectorAll('h1'),function(h){var parts=h.innerHTML.split(/<br\s*\/?>/i);h.dataset.t=parts[0].trim();if(parts.length>1&&(h.dataset.sub||/^(References|Références|Список литературы|المراجع)/.test(parts[0].trim()))){h.innerHTML=parts[0].trim()+'<span class="h1sub">'+parts.slice(1).join(' ')+'</span>'}if(parts.length>1&&!h.dataset.sub&&!/^(References|Références|Список литературы|المراجع)/.test(parts[0].trim())){h.dataset.t=parts[0].trim()+(B.lang==='fr'?'\u00a0: ':': ')+parts.slice(1).join(' ').trim();h.innerHTML='<span class="num">'+parts[0].trim()+'</span>'+parts.slice(1).join(' ')}});
   var blocks=Array.prototype.slice.call(src.children);
   var pages=[];var cur=null;var num=0;
   function open(){num++;cur=newPage(B,num);meas.appendChild(cur);pages.push(cur);return cur}
@@ -182,14 +183,14 @@ function build(B){
   for(var i=0;i<blocks.length;i++){
     var b=blocks[i];
     if(b.tagName==='H1'){
-      inRefs=/^(References|Références|المراجع)/.test(b.textContent.trim());
+      inRefs=/^(References|Références|Список литературы|المراجع)/.test(b.textContent.trim());
       if(!cur||cur._in.children.length)open();
       if(inRefs)cur._in.classList.add('refs');
       toc.push({t:(b.dataset.t||b.textContent).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim(),p:num,sub:false,guide:!!b.dataset.sub});
     }
     if(!cur)open();
     place(b);
-    if(b.tagName==='H2'){var last=null;for(var k=toc.length-1;k>=0;k--){if(!toc[k].sub){last=toc[k];break}}if(last&&last.guide&&/^(الفصل|Chapter|Chapitre)/.test(b.textContent.trim()))toc.push({t:b.textContent.trim(),p:pageOf(b),sub:true})}
+    if(b.tagName==='H2'){var last=null;for(var k=toc.length-1;k>=0;k--){if(!toc[k].sub){last=toc[k];break}}if(last&&last.guide&&/^(الفصل|Chapter|Chapitre|Глава)/.test(b.textContent.trim()))toc.push({t:b.textContent.trim(),p:pageOf(b),sub:true})}
   }
   function pageOf(node){return pages.indexOf(node.closest('.page'))+1}
   function place(b){
